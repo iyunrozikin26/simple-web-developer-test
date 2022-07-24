@@ -5,8 +5,8 @@ const User = require("../models/user");
 class Controller {
     static async getUsers(req, res, next) {
         try {
-            const users = await User.query();
-            res.status(200).json(users);
+            const users = await User.query().select("name", "email");
+            res.status(200).json({ data: users });
         } catch (error) {
             res.status(500).json(error);
         }
@@ -23,8 +23,7 @@ class Controller {
             };
 
             const createUser = await User.query().insert(newUser);
-
-            res.status(201).json(createUser);
+            res.status(201).json({ status: "created", email: createUser.email });
         } catch (error) {
             next(error);
         }
@@ -33,10 +32,10 @@ class Controller {
     static async userById(req, res, next) {
         const { id } = req.params;
         try {
-            const user = await User.query().findById(id);
+            const user = await User.query().findById(id).select("name", "email", "role");
             if (!user) next({ name: "not-found", message: "user not found" });
 
-            res.status(200).json(user);
+            res.status(200).json({ data: user });
         } catch (error) {
             next(error);
         }
