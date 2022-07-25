@@ -5,10 +5,10 @@ const User = require("../models/user");
 class Controller {
     static async getUsers(req, res, next) {
         try {
-            const users = await User.query().select("name", "email");
+            const users = await User.query().select("id", "name", "email");
             res.status(200).json({ data: users });
         } catch (error) {
-            res.status(500).json(error);
+            next(error);
         }
     }
 
