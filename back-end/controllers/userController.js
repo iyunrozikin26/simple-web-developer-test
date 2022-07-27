@@ -68,6 +68,8 @@ class Controller {
                 let token = signToken({ email: user.email });
                 res.status(200).json({
                     access_token: token,
+                    email: user.email,
+                    role: user.role,
                 });
             }
         } catch (error) {
