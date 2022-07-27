@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Details({setSelect}) {
+export default function Details({ setSelect }) {
+    const { user } = useSelector((state) => state.userReducer);
+    
     return (
         <div id="toast-notification" className="p-4 m-3 w-full h-32 max-w-xs text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
             <div className="flex items-center mb-3">
@@ -27,9 +30,9 @@ export default function Details({setSelect}) {
                     <img className="w-12 h-12 rounded-full" src="https://www.pngmart.com/files/21/Admin-Profile-PNG-Clipart.png" alt="Jese Leos image" />
                 </div>
                 <div className="ml-3 text-sm font-normal">
-                    <div className="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</div>
-                    <div className="text-sm font-normal">email</div>
-                    <div className="text-sm font-normal">role</div>
+                    <div className="text-sm font-semibold text-gray-900 dark:text-white">{user.name}</div>
+                    <div className="text-sm font-normal">{user.email}</div>
+                    <div className="text-sm font-normal">{user.role}</div>
                 </div>
             </div>
         </div>
