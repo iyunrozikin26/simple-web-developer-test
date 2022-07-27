@@ -217,7 +217,7 @@ test("delete user by role user", (done) => {
 
 test("delete user success by admin", (done) => {
     request(app)
-        .delete("/users/375")
+        .delete("/users/373")
         .set("access_token", access_token)
         .expect(200)
         .then((response) => {
