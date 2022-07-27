@@ -10,7 +10,7 @@ export const setLoading = (payload) => {
 export const setError = (payload) => {
     return { type: SET_ERROR, payload };
 };
-export const setSearch = (payload) => {
+export const setSearchUser = (payload) => {
     return { type: SET_SEARCH, payload };
 };
 export const setUsersDetails = (payload) => {

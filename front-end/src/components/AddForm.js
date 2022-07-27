@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { createNewUser } from "../store.js/actions/creator";
+import swal from "sweetalert";
 
 export default function AddForm() {
     const dispatch = useDispatch();
@@ -20,22 +21,25 @@ export default function AddForm() {
         });
     };
 
-    const submitCreateNewUser = (e) => {
+    const submitCreateNewUser = async (e) => {
         e.preventDefault();
-        dispatch(createNewUser(newUser))
-            .then((result) => {
-                if (result.status === "created") {
-                    setTimeout(() => {
-                        navigate("/");
-                        setNewUser({
-                            name: "",
-                            email: "",
-                            password: "",
-                        });
-                    }, 2000);
-                }
-            })
-            .catch((err) => console.log(err));
+        try {
+            if (newUser.name == "" || newUser.email == "" || newUser.password == "") throw { message: "fill all the field, please!" };
+            const result = await dispatch(createNewUser(newUser));
+            if (result.status === "created") {
+                swal(`${result.email}`, "success to create", "success");
+                setTimeout(() => {
+                    navigate("/");
+                    setNewUser({
+                        name: "",
+                        email: "",
+                        password: "",
+                    });
+                }, 2000);
+            }
+        } catch (error) {
+            swal("Ooopps...", `${error.message}`);
+        }
     };
     return (
         <div className="w-full bg-slate-200 flex flex-col justify-center items-center">
@@ -63,6 +67,7 @@ export default function AddForm() {
                                 Full Name
                             </label>
                         </div>
+
                         <div className="relative z-0 mb-6 w-full group">
                             <input
                                 type="email"
@@ -81,6 +86,7 @@ export default function AddForm() {
                                 Email address
                             </label>
                         </div>
+
                         <div className="relative z-0 mb-6 w-full group">
                             <input
                                 type="password"

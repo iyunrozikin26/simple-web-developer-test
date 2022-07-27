@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { IsLogin, IsLogout } from "./guard/isLogin";
+
 import AddForm from "./components/AddForm";
 import SideBar from "./components/SideBar";
-import { IsLogin, IsLogout } from "./guard/isLogin";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -20,7 +21,14 @@ function App() {
                         </IsLogin>
                     }
                 />
-                <Route path="users" element={<AddForm />} />
+                <Route
+                    path="users"
+                    element={
+                        <IsLogin>
+                            <AddForm />
+                        </IsLogin>
+                    }
+                />
                 <Route
                     path="login"
                     element={

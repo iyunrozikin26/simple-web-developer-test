@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Details({ setSelect }) {
     const { user } = useSelector((state) => state.userReducer);
-    
+
     return (
-        <div id="toast-notification" className="p-4 m-3 w-full h-32 max-w-xs text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+        <div id="toast-notification" className="p-4 m-3 w-full max-h-32 max-w-xs text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
             <div className="flex items-center mb-3">
-                <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Details notification</span>
+                <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Details notification user</span>
                 <button
                     type="button"
                     className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -30,10 +30,12 @@ export default function Details({ setSelect }) {
                     <img className="w-12 h-12 rounded-full" src="https://www.pngmart.com/files/21/Admin-Profile-PNG-Clipart.png" alt="Jese Leos image" />
                 </div>
                 <div className="ml-3 text-sm font-normal">
-                    <div className="text-sm font-semibold text-gray-900 dark:text-white">{user.name}</div>
                     <div className="text-sm font-normal">{user.email}</div>
                     <div className="text-sm font-normal">{user.role}</div>
                 </div>
+            </div>
+            <div className="flex items-center mb-3">
+                <span className="mt-1 mb-1 text-sm font-semibold text-gray-900 dark:text-white">Hi, I am {user.name}.</span>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { userLoginCreator } from "../store.js/actions/creator";
+import swal from "sweetalert";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ export default function Login() {
             [name]: value,
         });
     };
-    console.log(userLogin);
 
     const submitLogin = (e) => {
         e.preventDefault();
@@ -27,11 +27,14 @@ export default function Login() {
                 localStorage.setItem("access_token", result.access_token);
                 localStorage.setItem("email", result.email);
                 localStorage.setItem("role", result.role);
+                swal("Good job!", "Sign In success!", "success");
                 setTimeout(() => {
                     if (localStorage.access_token) navigate("/");
-                }, 2000);
+                }, 2500);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                swal(`${err.response.data.status}`, `${err.response.data.message}`, "error");
+            });
     };
     return (
         <div className="w-full bg-slate-200 flex flex-col justify-center items-center">

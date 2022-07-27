@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchUser } from "../store.js/actions/creator";
 
 export default function Search() {
+    const dispatch = useDispatch();
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(setSearchUser(search));
+    };
     return (
         <div className="flex justify-between">
-            <form className="flex items-center">
+            <form className="flex items-center" onSubmit={handleSearch}>
                 <label for="simple-search" className="sr-only">
                     Search
                 </label>
@@ -16,6 +25,8 @@ export default function Search() {
                     <input
                         type="text"
                         id="simple-search"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search"
                         required=""
