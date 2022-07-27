@@ -38,7 +38,11 @@ export default function AddForm() {
                 }, 2000);
             }
         } catch (error) {
-            swal("Ooopps...", `${error.message}`);
+            if (error.response) {
+                swal("Ooopps...!!!", `${error.response.data.message}!`);
+            } else {
+                swal("Ooopps...!!!", `${error.message}!`);
+            }
         }
     };
     return (

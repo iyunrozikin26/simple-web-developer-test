@@ -56,6 +56,8 @@ test("login empty password", (done) => {
 test("get users", (done) => {
     request(app)
         .get("/users")
+        .set("access_token", access_token)
+
         .expect(200)
         .then((response) => {
             // console.log(response.body);
@@ -67,6 +69,8 @@ test("get users", (done) => {
 test("get userById", (done) => {
     request(app)
         .get("/users/1")
+        .set("access_token", access_token)
+
         .expect(200)
         .then((response) => {
             // console.log(response.body);
@@ -78,6 +82,8 @@ test("get userById", (done) => {
 test("post Users failed email empty string", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send({
             email: "",
             password: "admin!123",
@@ -92,6 +98,8 @@ test("post Users failed email empty string", (done) => {
 test("post Users failed password empty string", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send({
             email: "admin@voltest.com",
             password: "",
@@ -106,6 +114,8 @@ test("post Users failed password empty string", (done) => {
 test("post Users failed email empty", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send({
             password: "admin!123",
         })
@@ -119,6 +129,8 @@ test("post Users failed email empty", (done) => {
 test("post Users failed password empty", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send({
             email: "admin@voltest.com",
         })
@@ -133,10 +145,11 @@ test("post Users failed password empty", (done) => {
 test("post Users success", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send(user)
         .expect(201)
         .then((response) => {
-            console.log(response.body);
             done();
         })
         .catch((err) => done(err));
@@ -160,6 +173,8 @@ test("login user succes", (done) => {
 test("post Users already exist", (done) => {
     request(app)
         .post("/users")
+        .set("access_token", access_token)
+
         .send(user)
         .expect(500)
         .then((response) => {
@@ -202,7 +217,7 @@ test("delete user by role user", (done) => {
 
 test("delete user success by admin", (done) => {
     request(app)
-        .delete("/users/2")
+        .delete("/users/375")
         .set("access_token", access_token)
         .expect(200)
         .then((response) => {

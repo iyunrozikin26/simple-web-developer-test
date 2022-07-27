@@ -8,7 +8,7 @@
         "migrate": "npx knex migrate:latest --knexfile db/knexfile.js",
         "down": "npx knex migrate:down --knexfile db/knexfile.js",
         "seed": "npx knex seed:run --knexfile db/knexfile.js",
-        "testing": "npx jest --detectOpenHandles --watch",
+        "testing": "npx jest --coverage",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
