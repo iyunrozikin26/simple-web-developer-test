@@ -27,10 +27,10 @@ export default function Login() {
                 localStorage.setItem("access_token", result.access_token);
                 localStorage.setItem("email", result.email);
                 localStorage.setItem("role", result.role);
-                swal("Good job!", "Sign In success!", "success");
+                // swal("Good job!", "Sign In success!", "success");
                 setTimeout(() => {
                     if (localStorage.access_token) navigate("/");
-                }, 2500);
+                }, 500);
             })
             .catch((err) => {
                 swal(`${err.response.data.status}`, `${err.response.data.message}`, "error");

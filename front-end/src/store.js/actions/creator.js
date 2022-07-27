@@ -24,12 +24,17 @@ export const getUsers = () => {
         axios({
             method: "GET",
             url: "/users",
+            headers: { access_token: localStorage.access_token },
         })
             .then(({ data }) => {
                 dispatch(setUsers(data));
             })
             .catch((error) => dispatch(setError("failed to get all users data")))
-            .finally(() => dispatch(setLoading(false)));
+            .finally(() => {
+                setTimeout(() => {
+                    dispatch(setLoading(false));
+                }, 3000);
+            });
     };
 };
 
@@ -38,6 +43,7 @@ export const getUserDetails = (id) => {
         axios({
             method: "GET",
             url: `/users/${id}`,
+            headers: { access_token: localStorage.access_token },
         })
             .then(({ data }) => {
                 dispatch(setUsersDetails(data.data));
@@ -58,6 +64,7 @@ export const deleteUser = (id) => {
                     return axios({
                         method: "GET",
                         url: "/users",
+                        headers: { access_token: localStorage.access_token },
                     });
                 }
             })
@@ -75,6 +82,7 @@ export const userLoginCreator = (userLogin) => {
                 method: "POST",
                 url: "/login",
                 data: userLogin,
+                headers: { access_token: localStorage.access_token },
             })
                 .then(({ data }) => {
                     resolve(data);
@@ -91,6 +99,7 @@ export const createNewUser = (newUser) => {
                 method: "POST",
                 url: "/users",
                 data: newUser,
+                headers: { access_token: localStorage.access_token },
             })
                 .then(({ data }) => {
                     resolve(data);

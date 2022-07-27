@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 import Details from "../components/Details";
 import ListUsers from "../components/ListUsers";
 import Search from "../components/Search";
+import NotFound from "./NotFound";
+import ReactLoading from "react-loading";
 
 import { getUsers } from "../store.js/actions/creator";
 
@@ -21,8 +23,13 @@ export default function Home() {
     }, []);
     return (
         <div className="w-full flex bg-slate-200">
-            {loading && <span className="text-3xl text-fuchsia-500">Loading...</span>}
-            {!loading && error && <h3>{error}</h3>}
+            {loading && (
+                <div className="w-full flex flex-col justify-center items-center">
+                    <span className="text-3xl">Loading in getting data</span>
+                    <ReactLoading type="bars" color="#0000FF" height={100} width={50} />
+                </div>
+            )}
+            {!loading && error && <NotFound />}
             {!loading && !error && (
                 <>
                     <div className="w-full px-5">
